@@ -110,14 +110,7 @@
                 </div>
                 <div class="clinical-data-uploader">
                     <h2>Upload Clinical Data</h2>
-                    <el-upload
-                    class="upload-demo"
-                    drag
-                    size="mini"
-                    multiple>
-                    <i class="el-icon-upload"></i>
-                        <div class="el-upload__text">Drag files here, or <em>click to upload</em></div>
-                    </el-upload>
+                    <el-button type="text" @click="clinicalFormVisible=true">Click to fill in diagnostic data</el-button>
                 </div>
             </div>
             <div class="right-container">
@@ -131,21 +124,132 @@
             </div>
         </div>
 
+        <!-- Clinical Data Fill Form Dialog-->
+        <el-dialog
+            title="Clinical Form"
+            :visible.sync="clinicalFormVisible"
+            width="30%">
+
+            <el-form>
+                <el-form-item label="gender">
+                    <el-radio v-model="clinical_data['gender']" :label="'male'">Male</el-radio>
+                    <el-radio v-model="clinical_data['gender']" :label="'female'">Female</el-radio>
+                </el-form-item>
+                <el-form-item label="age">
+                    <el-input-number v-model="clinical_data['age']" size="mini" :min="0"></el-input-number>
+                </el-form-item>
+                <el-form-item label="history of diabetes">
+                    <el-radio v-model="clinical_data['history_of_diabetes']" :label="'without'">No</el-radio>
+                    <el-radio v-model="clinical_data['history_of_diabetes']" :label="'with'">Yes</el-radio>
+                </el-form-item>
+                <el-form-item label="history of hypertension">
+                    <el-radio v-model="clinical_data['history_of_hypertension']" :label="'without'">No</el-radio>
+                    <el-radio v-model="clinical_data['history_of_hypertension']" :label="'with'">Yes</el-radio>
+                </el-form-item>
+                <el-form-item label="smoking history">
+                    <el-radio v-model="clinical_data['smoking_history']" :label="'without'">No</el-radio>
+                    <el-radio v-model="clinical_data['smoking_history']" :label="'with'">Yes</el-radio>
+                </el-form-item>
+                <el-form-item label="drinking history">
+                    <el-radio v-model="clinical_data['drinking_history']" :label="'without'">No</el-radio>
+                    <el-radio v-model="clinical_data['drinking_history']" :label="'sometimes'">Sometimes</el-radio>
+                    <el-radio v-model="clinical_data['drinking_history']" :label="'frequently'">Frequently</el-radio>
+                    <el-radio v-model="clinical_data['drinking_history']" :label="'else'">Else</el-radio>
+                </el-form-item>
+                <el-form-item label="family history of tumor">
+                    <el-radio v-model="clinical_data['family_history_of_tumor']" :label="'without'">No</el-radio>
+                    <el-radio v-model="clinical_data['family_history_of_tumor']" :label="'with'">Yes</el-radio>
+                </el-form-item>
+                <el-form-item label="pathological stage">
+                    <el-radio v-model="clinical_data['pathological_stage']" :label="'I'">I</el-radio>
+                    <el-radio v-model="clinical_data['pathological_stage']" :label="'II'">II</el-radio>
+                    <el-radio v-model="clinical_data['pathological_stage']" :label="'III'">III</el-radio>
+                    <el-radio v-model="clinical_data['pathological_stage']" :label="'IV'">IV</el-radio>
+                    <el-radio v-model="clinical_data['pathological_stage']" :label="'else'">else</el-radio>
+                </el-form-item>
+                <el-form-item label="perineural invasion">
+                    <el-radio v-model="clinical_data['perineural_invasion']" :label="'without'">No</el-radio>
+                    <el-radio v-model="clinical_data['perineural_invasion']" :label="'with'">Yes</el-radio>
+                    <el-radio v-model="clinical_data['perineural_invasion']" :label="'else'">Else</el-radio>
+                </el-form-item>
+                <el-form-item label="pathological_type">
+                    <el-radio v-model="clinical_data['pathological_type']" :label="'well'">Well</el-radio>
+                    <el-radio v-model="clinical_data['pathological_type']" :label="'mix'">Mix</el-radio>
+                    <el-radio v-model="clinical_data['pathological_type']" :label="'poor'">Poor</el-radio>
+                    <el-radio v-model="clinical_data['pathological_type']" :label="'else'">Else</el-radio>
+                </el-form-item>
+                <el-form-item label="position">
+                    <el-radio v-model="clinical_data['position']" :label="'RCC'">RCC</el-radio>
+                    <el-radio v-model="clinical_data['position']" :label="'LCC'">LCC</el-radio>
+                    <el-radio v-model="clinical_data['position']" :label="'REC'">REC</el-radio>
+                    <el-radio v-model="clinical_data['position']" :label="'else'">Else</el-radio>
+                </el-form-item>
+                <el-form-item label="white blood cell count">
+                    <el-input size="mini" v-model="clinical_data['white_blood_cell_count']" style="width:300px;"></el-input>
+                </el-form-item>
+                <el-form-item label="red blood cell count">
+                    <el-input size="mini" v-model="clinical_data['red_blood_cell_count']" style="width:300px;"></el-input>
+                </el-form-item>
+            </el-form>
+            
+
+            <span slot="footer">
+                <el-button @click="clinicalFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="clinicalFormVisible = false">确 定</el-button>
+            </span>
+        </el-dialog>
 
 
-
-
-
-
-
-
-  
     </div>
 </template>
 
 <script>
 export default {
+    data(){
+        return {
+            clinicalFormVisible:false,
+            
+            clinical_data:{
+                'gender':'male',
+                'age':64,
+                'history_of_diabetes':'without',//糖尿病史 without with
+                'history_of_hypertension':'with',//高血压病史 without with
+                'smoking_history':'with',//吸烟史 without with
+                'drinking_history':'else',//饮酒史 without sometimes frequently else
+                'family_history_of_tumor':'without',//肿瘤家族史 without with 
+                'pathological_stage':'II',//病理分期 I II III IV else
+                'perineural_invasion':'else',//神经周侵犯 without with else
+                'pathological_type':'well',//病理类型 well mix poor else
+                'position':'RCC',//位置 RCC LCC REC else
+                'white_blood_cell_count':6.1,//白细胞计数
+                'red_blood_cell_count':4.19,//红细胞计数
+                'platelet_concentration':153.0,//血小板计数
+                'neutrophil_count':3.8,//中性粒细胞计数
+                'lymphocyte_count':1.9,//淋巴细胞计数
+                'red_cell_volumn_distribution_width':14.4,//红细胞体积分布宽度
+                'plateletcrit':0.2,//血小板比容
+                'mean_platelet_volume':11.3,//平均血小板体积
+                'albumin':42.8,//白蛋白
+                'globulin':20.8,//球蛋白
+                'albumin_globulin_ratio':2.1,//白球比值
+                'blood_glucose':5.03,//血糖
+                'triglyceride':1.23,//甘油三酯
+                'cholesterol':4.42,//胆固醇
+                'high_density_lipoprotein':1.61,//高密度脂蛋白
+                'low_density_lipoprotein':2.46,//低密度脂蛋白
+                'carcinoembryonic_antigen':0.2,//CEA
+                'carcinoembryonic_antigen_199':2.29,//CA199
+                'carcinoembryonic_antigen_125':1.08,//CA125
+            }
+            
 
+        }
+    },
+    methods:{
+        test(){
+            console.log(this.clinical_data)
+        }
+    }
 }
 </script>
 
@@ -157,7 +261,7 @@ export default {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
             width:1200px;
-            height:800px;
+            height:600px;
             display: flex;
             flex-direction: column;
         }

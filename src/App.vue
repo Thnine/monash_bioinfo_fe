@@ -29,8 +29,6 @@ export default {
   align-items: center;
   width: 100%;
   height: 100%;
-  min-width: 0px;
-  min-height: 0px;
   margin:0px;
   padding:0px;
 }

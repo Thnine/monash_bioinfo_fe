@@ -126,128 +126,336 @@
 
         <!-- Clinical Data Fill Form Dialog-->
         <el-dialog
-            title="Clinical Form"
             :visible.sync="clinicalFormVisible"
-            width="50%">
+            width="40%">
 
-            <el-form>
-                <el-form-item label-width="200px" label="gender">
-                    <el-radio v-model="clinical_data['gender']" :label="'male'">Male</el-radio>
-                    <el-radio v-model="clinical_data['gender']" :label="'female'">Female</el-radio>
-                </el-form-item>
-                <el-form-item label-width="200px" label="age">
-                    <el-input-number v-model="clinical_data['age']" size="mini" :min="0"></el-input-number>
-                </el-form-item>
-                <el-form-item label-width="200px" label="history of diabetes">
-                    <el-radio v-model="clinical_data['history_of_diabetes']" :label="'without'">No</el-radio>
-                    <el-radio v-model="clinical_data['history_of_diabetes']" :label="'with'">Yes</el-radio>
-                </el-form-item>
-                <el-form-item label-width="200px" label="history of hypertension">
-                    <el-radio v-model="clinical_data['history_of_hypertension']" :label="'without'">No</el-radio>
-                    <el-radio v-model="clinical_data['history_of_hypertension']" :label="'with'">Yes</el-radio>
-                </el-form-item>
-                <el-form-item label-width="200px" label="smoking history">
-                    <el-radio v-model="clinical_data['smoking_history']" :label="'without'">No</el-radio>
-                    <el-radio v-model="clinical_data['smoking_history']" :label="'with'">Yes</el-radio>
-                </el-form-item>
-                <el-form-item label-width="200px" label="drinking history">
-                    <el-radio v-model="clinical_data['drinking_history']" :label="'without'">No</el-radio>
-                    <el-radio v-model="clinical_data['drinking_history']" :label="'sometimes'">Sometimes</el-radio>
-                    <el-radio v-model="clinical_data['drinking_history']" :label="'frequently'">Frequently</el-radio>
-                    <el-radio v-model="clinical_data['drinking_history']" :label="'else'">Else</el-radio>
-                </el-form-item>
-                <el-form-item label-width="200px" label="family history of tumor">
-                    <el-radio v-model="clinical_data['family_history_of_tumor']" :label="'without'">No</el-radio>
-                    <el-radio v-model="clinical_data['family_history_of_tumor']" :label="'with'">Yes</el-radio>
-                </el-form-item>
-                <el-form-item label-width="200px" label="pathological stage">
-                    <el-radio v-model="clinical_data['pathological_stage']" :label="'I'">I</el-radio>
-                    <el-radio v-model="clinical_data['pathological_stage']" :label="'II'">II</el-radio>
-                    <el-radio v-model="clinical_data['pathological_stage']" :label="'III'">III</el-radio>
-                    <el-radio v-model="clinical_data['pathological_stage']" :label="'IV'">IV</el-radio>
-                    <el-radio v-model="clinical_data['pathological_stage']" :label="'else'">else</el-radio>
-                </el-form-item>
-                <el-form-item label-width="200px" label="perineural invasion">
-                    <el-radio v-model="clinical_data['perineural_invasion']" :label="'without'">No</el-radio>
-                    <el-radio v-model="clinical_data['perineural_invasion']" :label="'with'">Yes</el-radio>
-                    <el-radio v-model="clinical_data['perineural_invasion']" :label="'else'">Else</el-radio>
-                </el-form-item>
-                <el-form-item label-width="200px" label="pathological_type">
-                    <el-radio v-model="clinical_data['pathological_type']" :label="'well'">Well</el-radio>
-                    <el-radio v-model="clinical_data['pathological_type']" :label="'mix'">Mix</el-radio>
-                    <el-radio v-model="clinical_data['pathological_type']" :label="'poor'">Poor</el-radio>
-                    <el-radio v-model="clinical_data['pathological_type']" :label="'else'">Else</el-radio>
-                </el-form-item>
-                <el-form-item label-width="200px" label="position">
-                    <el-radio v-model="clinical_data['position']" :label="'RCC'">RCC</el-radio>
-                    <el-radio v-model="clinical_data['position']" :label="'LCC'">LCC</el-radio>
-                    <el-radio v-model="clinical_data['position']" :label="'REC'">REC</el-radio>
-                    <el-radio v-model="clinical_data['position']" :label="'else'">Else</el-radio>
-                </el-form-item>
-                <el-form-item label="white blood cell count">
-                    <el-input size="mini" v-model="clinical_data['white_blood_cell_count']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="red blood cell count">
-                    <el-input size="mini" v-model="clinical_data['red_blood_cell_count']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="platelet concentration">
-                    <el-input size="mini" v-model="clinical_data['platelet_concentration']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="neutrophil count">
-                    <el-input size="mini" v-model="clinical_data['neutrophil_count']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="lymphocyte count">
-                    <el-input size="mini" label-width="200px" v-model="clinical_data['lymphocyte_count']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="red cell volumn distribution width">
-                    <el-input size="mini" v-model="clinical_data['red_cell_volumn_distribution_width']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="plateletcrit">
-                    <el-input size="mini" v-model="clinical_data['plateletcrit']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="mean platelet volume">
-                    <el-input size="mini" v-model="clinical_data['mean_platelet_volume']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="albumin">
-                    <el-input size="mini" v-model="clinical_data['albumin']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="globulin">
-                    <el-input size="mini" v-model="clinical_data['globulin']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="albumin globulin ratio">
-                    <el-input size="mini" v-model="clinical_data['albumin_globulin_ratio']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="blood glucose">
-                    <el-input size="mini" v-model="clinical_data['blood_glucose']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="triglyceride">
-                    <el-input size="mini" v-model="clinical_data['triglyceride']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="cholesterol">
-                    <el-input size="mini" v-model="clinical_data['cholesterol']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="high density lipoprotein">
-                    <el-input size="mini" v-model="clinical_data['high_density_lipoprotein']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="low density lipoprotein">
-                    <el-input size="mini" v-model="clinical_data['low_density_lipoprotein']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="carcinoembryonic antigen">
-                    <el-input size="mini" v-model="clinical_data['carcinoembryonic_antigen']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="carcinoembryonic antigen 199">
-                    <el-input size="mini" v-model="clinical_data['carcinoembryonic_antigen_199']" style="width:300px;"></el-input>
-                </el-form-item>
-                <el-form-item label="carcinoembryonic antigen 125">
-                    <el-input size="mini" v-model="clinical_data['carcinoembryonic_antigen_125']" style="width:300px;"></el-input>
-                </el-form-item>
-            </el-form>
-            
+            <div class="clinical-form-intro-container">
+                <div style="display:flex;flex-direction:row;align-items:center">
+                    <b style="font-size:31px">Clinical Data Collection Form</b>
 
-            <span slot="footer">
-                <el-button @click="clinicalFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="clinicalFormVisible = false">确 定</el-button>
-            </span>
+                    <div style="flex:1 1 0"></div>
+                </div>
+                <div>
+                    <p style="font-size:18px;text-align:left;word-break:keep-all;">
+                        Please fill in the following clinical data carefully and cautiously, as a prerequisite for the implementation of our algorithm.
+                    </p>
+                </div>
+                <div style="text-align:left">
+                    <el-button type="text"><span style="font-size:18px">Use .csv files to fill in quickly</span></el-button>
+                </div>
+
+            </div>
+
+            <div class="clinical-form-content-container">
+
+                <div style="display:flex;flex-direction:column;flex:1 1 0;padding-right:15px;">
+                    <!--content left column-->
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Gender</b></div>
+                        <div>
+                            <el-radio v-model="clinical_data['gender']" :label="'male'">Male</el-radio>
+                            <el-radio v-model="clinical_data['gender']" :label="'female'">Female</el-radio>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>History of Diabetes</b></div>
+                        <div>
+                            <el-radio v-model="clinical_data['history_of_diabetes']" :label="'without'">No</el-radio>
+                            <el-radio v-model="clinical_data['history_of_diabetes']" :label="'with'">Yes</el-radio>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Smoking History</b></div>
+                        <div>
+                            <el-radio v-model="clinical_data['smoking_history']" :label="'without'">No</el-radio>
+                            <el-radio v-model="clinical_data['smoking_history']" :label="'with'">Yes</el-radio>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Family History Of Tumor</b></div>
+                        <div>
+                            <el-radio v-model="clinical_data['family_history_of_tumor']" :label="'without'">No</el-radio>
+                            <el-radio v-model="clinical_data['family_history_of_tumor']" :label="'with'">Yes</el-radio>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Perineural Invasion</b></div>
+                        <div>
+                            <el-radio-group v-model="clinical_data['perineural_invasion']" style="width:100%;text-align:left">
+                                <el-row style="margin-bottom:10px;text-align:center">
+                                    <el-col :span="8">
+                                        <el-radio :label="'without'">No</el-radio>
+                                    </el-col>
+                                    <el-col :span="8">
+                                        <el-radio :label="'with'">Yes</el-radio>
+                                    </el-col>
+                                    <el-col :span="8">
+                                        <el-radio :label="'else'">Else</el-radio>
+                                    </el-col>
+                                </el-row>
+                            </el-radio-group>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Position</b></div>
+                        <div>
+                            <el-radio-group v-model="clinical_data['position']" style="width:100%;text-align:left">
+                                <el-row style="margin-bottom:10px;">
+                                    <el-col :span="12">
+                                        <el-radio :label="'RCC'">RCC</el-radio>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-radio :label="'LCC'">LCC</el-radio>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+                                    <el-col :span="12">
+                                        <el-radio :label="'REC'">REC</el-radio>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-radio :label="'else'">Else</el-radio>
+                                    </el-col>
+                                </el-row>
+                            </el-radio-group>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Red Blood Cell Count</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['red_blood_cell_count']" style="width:70%;">
+                                <template slot="append">*109/L</template>
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Neutrophil Count</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['neutrophil_count']" style="width:70%;">
+                                <template slot="append">*109/L</template>
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Plateletcrit</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['plateletcrit']" style="width:70%;">
+                                <template slot="append">PCT</template>
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Albumin</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['albumin']" style="width:70%;">
+                                <template slot="append">g/L</template>
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Albumin Globulin Ratio</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['albumin_globulin_ratio']" style="width:70%;">
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Triglyceride</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['triglyceride']" style="width:70%;">
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>High Density Lipoprotein</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['high_density_lipoprotein']" style="width:70%;">
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Carcinoembryonic Antigen</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['carcinoembryonic_antigen']" style="width:70%;">
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Carcinoembryonic Antigen 125</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['carcinoembryonic_antigen_125']" style="width:70%;">
+                            </el-input>
+                        </div>
+                    </el-card>
+                </div>
+
+
+
+
+                <div style="display:flex;flex-direction:column;flex:1 1 0;padding-left:15px;">
+                    <!--content right column-->
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Age</b></div>
+                        <div>
+                            <el-input-number v-model="clinical_data['age']" size="mini" :min="0" style="width:70%"></el-input-number>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>History of Hypertension</b></div>
+                        <div>
+                            <el-radio v-model="clinical_data['history_of_hypertension']" :label="'without'">No</el-radio>
+                            <el-radio v-model="clinical_data['history_of_hypertension']" :label="'with'">Yes</el-radio>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Drinking History</b></div>
+                        <div>
+                            <el-radio-group v-model="clinical_data['drinking_history']" style="width:100%;text-align:left">
+                                <el-row style="margin-bottom:10px;">
+                                    <el-col :span="12">
+                                        <el-radio :label="'without'">No</el-radio>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-radio :label="'sometimes'">Sometimes</el-radio>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+                                    <el-col :span="12">
+                                        <el-radio :label="'frequently'">Frequently</el-radio>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-radio :label="'else'">Else</el-radio>
+                                    </el-col>
+                                </el-row>
+                            </el-radio-group>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Pathological Stage</b></div>
+                        <div>
+                            <el-radio-group v-model="clinical_data['pathological_stage']" style="width:100%;text-align:left">
+                                <el-row style="margin-bottom:10px;">
+                                    <el-col :span="12">
+                                        <el-radio :label="'I'">I</el-radio>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-radio :label="'II'">II</el-radio>
+                                    </el-col>
+                                </el-row>
+                                <el-row style="margin-bottom:10px;">
+                                    <el-col :span="12">
+                                        <el-radio :label="'III'">III</el-radio>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-radio :label="'IV'">IV</el-radio>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+                                    <el-col :span="12">
+                                        <el-radio :label="'else'">Else</el-radio>
+                                    </el-col>
+                                    <el-col :span="12">
+                                    </el-col>
+                                </el-row>
+                            </el-radio-group>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Pathological Type</b></div>
+                        <div>
+                            <el-radio-group v-model="clinical_data['pathological_type']" style="width:100%;text-align:left">
+                                <el-row style="margin-bottom:10px;">
+                                    <el-col :span="12">
+                                        <el-radio :label="'well'">Well</el-radio>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-radio :label="'mix'">Mix</el-radio>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+                                    <el-col :span="12">
+                                        <el-radio :label="'poor'">Poor</el-radio>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-radio :label="'else'">Else</el-radio>
+                                    </el-col>
+                                </el-row>
+                            </el-radio-group>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>White Blood Cell Count</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['white_blood_cell_count']" style="width:70%;">
+                                <template slot="append">*109/L</template>
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Platelet Concentration</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['platelet_concentration']" style="width:70%;">
+                                <template slot="append">*109/L</template>
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Red Cell Volumn Distribution Width</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['red_cell_volumn_distribution_width']" style="width:70%;">
+                                <template slot="append">RDW</template>
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Mean Platelet Volume</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['mean_platelet_volume']" style="width:70%;">
+                                <template slot="append">MPV</template>
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Globulin</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['globulin']" style="width:70%;">
+                                <template slot="append">g/L</template>
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Blood Glucose</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['blood_glucose']" style="width:70%;">
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Cholesterol</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['cholesterol']" style="width:70%;">
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Low Density Lipoprotein</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['low_density_lipoprotein']" style="width:70%;">
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Carcinoembryonic Antigen 199</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['carcinoembryonic_antigen_199']" style="width:70%;">
+                            </el-input>
+                        </div>
+                    </el-card>
+                </div>
+            </div>
+
+            <el-button type="primary" @click="clinicalFormVisible=false" style="width:150px;">Finish</el-button>
+
+
         </el-dialog>
 
 
@@ -310,7 +518,6 @@ export default {
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
             width:1200px;
             height:600px;
             display: flex;
@@ -350,6 +557,25 @@ export default {
             margin:10px;
         }
 
+        .clinical-form-intro-container{
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            margin:0 40px 40px 40px;
+            border-bottom:2px solid lightgray;
+
+        }
+
+        .clinical-form-content-container{
+            margin:0 40px 40px 40px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .clinical-form-unit{
+            margin-bottom:25px;
+        }
+
 
         h1 {
             font-size: 24px;
@@ -357,15 +583,15 @@ export default {
             color: #007BFF;
         }
 
-        p {
-            font-size: 18px;
-            margin-bottom: 2rem;
-        }
 
         h2 {
             font-size: 18px;
             margin-bottom: 1rem;
             color: #343a40;
+        }
+
+        .el-form-item__label{
+            font-size:17px;
         }
 
         .result-section {

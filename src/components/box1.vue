@@ -110,9 +110,29 @@
                 </div>
                 <div class="clinical-data-uploader">
                     <h2>Upload Clinical Data</h2>
-                    <el-button type="text" @click="clinicalFormVisible=true">Click to fill in diagnostic data</el-button>
+                    <div style="display: flex;flex-direction: row;">
+                        <div style="display: flex;margin:0px 10px 0px 30px;">
+                            <img style="width:200px;height:200px;color:black;"src="@/assets/clinical_record.svg"></img>
+                        </div>
+                        <div style="display: flex;flex-direction: column;justify-content: center;flex:1 1 0;margin:0px 30px 0px 10px;">
+                            <div style="margin-bottom: 10px;">
+                                <b>Completion status: &nbsp;</b>
+                                <b :style="{color:clinical_complete_num == total_clinical_num ?' #007BFF' : '#d12323'}">{{clinical_complete_num}}</b>
+                                <b>/</b>
+                                <b>{{total_clinical_num}}</b>
+                            </div>
+                            <el-button style="margin-top: 10px;" type="primary" @click="clinicalFormVisible=true">
+                                <span style="font-size:18px;">Input Clinical Data</span>   
+                            </el-button>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <div style="margin:15px 20px;border:2px solid lightgray"></div>
+
+            <img></img>
+
             <div class="right-container">
                 <el-button type="primary" style="font-size:18px;">Start Calculation</el-button>
         
@@ -453,6 +473,7 @@
                 </div>
             </div>
 
+
             <el-button type="primary" @click="clinicalFormVisible=false" style="width:150px;">Finish</el-button>
 
 
@@ -463,6 +484,8 @@
 </template>
 
 <script>
+
+
 export default {
     data(){
         return {
@@ -499,7 +522,10 @@ export default {
                 'carcinoembryonic_antigen':0.2,//CEA
                 'carcinoembryonic_antigen_199':2.29,//CA199
                 'carcinoembryonic_antigen_125':1.08,//CA125
-            }
+            },
+
+            clinical_complete_num:23,
+            total_clinical_num:24,
             
 
         }
@@ -519,7 +545,6 @@ export default {
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width:1200px;
-            height:600px;
             display: flex;
             flex-direction: column;
         }
@@ -527,6 +552,7 @@ export default {
         .intro-container{
             display: flex;
             flex-direction: column;
+            margin-bottom:25px;
         }
 
         .content-container{
@@ -542,11 +568,13 @@ export default {
         }
 
         .tumor-image-uploader{
-            
+            margin-bottom:25px;
         }
 
         .clinical-data-uploader{
-
+            display:flex;
+            flex-direction: column;
+            align-items: stretch;
         }
 
         .result-shower{

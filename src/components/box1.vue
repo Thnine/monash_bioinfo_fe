@@ -6,7 +6,7 @@
         </div>
 
         <div class="content-container">
-            <div class="left-container">
+            <div class="top-container">
                 <div class="tumor-image-uploader">
                     <h2>Upload Tumor Images</h2>
                     <div style="display:flex;flex-direction:row;justify-content:center">
@@ -112,7 +112,7 @@
                     <h2>Upload Clinical Data</h2>
                     <div style="display: flex;flex-direction: row;">
                         <div style="display: flex;margin:0px 10px 0px 30px;">
-                            <img style="width:200px;height:200px;color:black;"src="@/assets/clinical_record.svg"></img>
+                            <img style="width:200px;height:200px;color:black;" src="@/assets/clinical_record.svg"></img>
                         </div>
                         <div style="display: flex;flex-direction: column;justify-content: center;flex:1 1 0;margin:0px 30px 0px 10px;">
                             <div style="margin-bottom: 10px;">
@@ -121,7 +121,7 @@
                                 <b>/</b>
                                 <b>{{total_clinical_num}}</b>
                             </div>
-                            <el-button style="margin-top: 10px;" type="primary" @click="clinicalFormVisible=true">
+                            <el-button size="mini" style="margin-top: 10px;" type="primary" @click="clinicalFormVisible=true">
                                 <span style="font-size:18px;">Input Clinical Data</span>   
                             </el-button>
                         </div>
@@ -129,18 +129,18 @@
                 </div>
             </div>
 
-            <div style="margin:15px 20px;border:2px solid lightgray"></div>
+            <div style="margin:15px 20px;border:1.5px solid lightgray"></div>
 
-            <img></img>
-
-            <div class="right-container">
-                <el-button type="primary" style="font-size:18px;">Start Calculation</el-button>
-        
-                <div class="result-shower">
-                    <h2>MSI Score</h2>
-                    <div class="result-box" id="msi-score">The results are displayed here</div>
+            <div class="bottom-container">
+                <div style="flex:1 1 0"></div>
+                <el-button size="mini" type="primary" style="font-size:18px;margin-right:40px;">Start Calculation</el-button>
+                <div style="position:absolute;text-align:center;width:100%">
+                    <div>
+                        <b>MSI score</b>
+                        <b>:</b>
+                        <span>{{MSI_score}}</span>
+                    </div> 
                 </div>
-
             </div>
         </div>
 
@@ -526,6 +526,8 @@ export default {
 
             clinical_complete_num:23,
             total_clinical_num:24,
+
+            MSI_score:'No score'
             
 
         }
@@ -557,29 +559,33 @@ export default {
 
         .content-container{
             display: flex;
+            flex-direction: column;
+            align-items: stretch;
         }
 
-        .left-container{
-
+        .top-container{
+            display: flex;
         }
 
-        .right-container{
-
+        .bottom-container{
+            display: flex;
+            position: relative;
         }
 
         .tumor-image-uploader{
             margin-bottom:25px;
+            margin-right:25px;
+            flex:1 1 0;
         }
 
         .clinical-data-uploader{
             display:flex;
             flex-direction: column;
             align-items: stretch;
+            margin-left:25px;
+            flex: 1 1 0;
         }
 
-        .result-shower{
-
-        }
 
         .image-upload-unit{
             margin:10px;

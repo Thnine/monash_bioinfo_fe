@@ -7,126 +7,132 @@
 
         <div class="content-container">
             <div class="top-container">
-                <div class="tumor-image-uploader">
-                    <h2>Upload Tumor Images</h2>
-                    <div style="display:flex;flex-direction:row;justify-content:center">
-                        <div class="image-upload-unit">
-                            <b style="margin-bottom:5px;">1/4 tumor</b>
-                            <el-upload
-                                list-type="picture-card">
-                                <i slot="default" class="el-icon-plus"></i>
-                                <div slot="file" slot-scope="{file}">
-                                <img
-                                    class="el-upload-list__item-thumbnail"
-                                    :src="file.url" alt=""
-                                >
-                                <span class="el-upload-list__item-actions">
-                                    <span
-                                    class="el-upload-list__item-preview"
+                <el-card style="margin-right:10px;">
+                    <div class="tumor-image-uploader">
+                        <h2>Upload Tumor Images</h2>
+                        <div style="display:flex;flex-direction:row;justify-content:center">
+                            <div class="image-upload-unit">
+                                <b style="margin-bottom:5px;">1/4 tumor</b>
+                                <el-upload
+                                    action="http"
+                                    list-type="picture-card"
+                                    :data="cv_data1">
+                                    <i slot="default" class="el-icon-plus"></i>
+                                    <div slot="file" slot-scope="{file}">
+                                    <img
+                                        class="el-upload-list__item-thumbnail"
+                                        :src="file.url" alt=""
                                     >
-                                    <i class="el-icon-zoom-in"></i>
+                                    <span class="el-upload-list__item-actions">
+                                        <span
+                                        class="el-upload-list__item-preview"
+                                        >
+                                        <i class="el-icon-zoom-in"></i>
+                                        </span>
+                                        <span
+                                        v-if="!disabled"
+                                        class="el-upload-list__item-delete"
+                                        >
+                                        <i class="el-icon-download"></i>
+                                        </span>
+                                        <span
+                                        v-if="!disabled"
+                                        class="el-upload-list__item-delete"
+                                        >
+                                        <i class="el-icon-delete"></i>
+                                        </span>
                                     </span>
-                                    <span
-                                    v-if="!disabled"
-                                    class="el-upload-list__item-delete"
-                                    >
-                                    <i class="el-icon-download"></i>
-                                    </span>
-                                    <span
-                                    v-if="!disabled"
-                                    class="el-upload-list__item-delete"
-                                    >
-                                    <i class="el-icon-delete"></i>
-                                    </span>
-                                </span>
-                                </div>
-                            </el-upload>
-                        </div>
-                        <div class="image-upload-unit">
-                            <b style="margin-bottom:5px;">1/2 tumor</b>
-                            <el-upload
-                                list-type="picture-card">
-                                <i slot="default" class="el-icon-plus"></i>
-                                <div slot="file" slot-scope="{file}">
-                                <img
-                                    class="el-upload-list__item-thumbnail"
-                                    :src="file.url" alt=""
-                                >
-                                <span class="el-upload-list__item-actions">
-                                    <span
-                                    class="el-upload-list__item-preview"
-                                    >
-                                    <i class="el-icon-zoom-in"></i>
-                                    </span>
-                                    <span
-                                    v-if="!disabled"
-                                    class="el-upload-list__item-delete"
-                                    >
-                                    <i class="el-icon-download"></i>
-                                    </span>
-                                    <span
-                                    v-if="!disabled"
-                                    class="el-upload-list__item-delete"
-                                    >
-                                    <i class="el-icon-delete"></i>
-                                    </span>
-                                </span>
-                                </div>
-                            </el-upload>
-                        </div>
-                        <div class="image-upload-unit">
-                            <b style="margin-bottom:5px;">3/4 tumor</b>
-                            <el-upload
-                                list-type="picture-card">
-                                <i slot="default" class="el-icon-plus"></i>
-                                <div slot="file" slot-scope="{file}">
-                                <img
-                                    class="el-upload-list__item-thumbnail"
-                                    :src="file.url" alt=""
-                                >
-                                <span class="el-upload-list__item-actions">
-                                    <span
-                                    class="el-upload-list__item-preview"
-                                    >
-                                    <i class="el-icon-zoom-in"></i>
-                                    </span>
-                                    <span
-                                    v-if="!disabled"
-                                    class="el-upload-list__item-delete"
-                                    >
-                                    <i class="el-icon-download"></i>
-                                    </span>
-                                    <span
-                                    v-if="!disabled"
-                                    class="el-upload-list__item-delete"
-                                    >
-                                    <i class="el-icon-delete"></i>
-                                    </span>
-                                </span>
-                                </div>
-                            </el-upload>
-                        </div>
-                    </div>
-                </div>
-                <div class="clinical-data-uploader">
-                    <h2>Upload Clinical Data</h2>
-                    <div style="display: flex;flex-direction: row;">
-                        <div style="display: flex;margin:0px 10px 0px 30px;">
-                            <img style="width:200px;height:200px;color:black;" src="@/assets/clinical_record.svg"></img>
-                        </div>
-                        <div style="display: flex;flex-direction: column;justify-content: center;flex:1 1 0;margin:0px 30px 0px 10px;">
-                            <div style="margin-bottom: 10px;">
-                                <b>Completion status: &nbsp;</b>
-                                <b :style="{color:clinical_complete_num == total_clinical_num ?' #007BFF' : '#d12323'}">{{clinical_complete_num}}</b>
-                                <b>/</b>
-                                <b>{{total_clinical_num}}</b>
+                                    </div>
+                                </el-upload>
                             </div>
-                            <el-button size="mini" style="margin-top: 10px;" type="primary" @click="clinicalFormVisible=true">
-                                <span style="font-size:18px;">Input Clinical Data</span>   
-                            </el-button>
+                            <div class="image-upload-unit">
+                                <b style="margin-bottom:5px;">1/2 tumor</b>
+                                <el-upload
+                                    list-type="picture-card">
+                                    <i slot="default" class="el-icon-plus"></i>
+                                    <div slot="file" slot-scope="{file}">
+                                    <img
+                                        class="el-upload-list__item-thumbnail"
+                                        :src="file.url" alt=""
+                                    >
+                                    <span class="el-upload-list__item-actions">
+                                        <span
+                                        class="el-upload-list__item-preview"
+                                        >
+                                        <i class="el-icon-zoom-in"></i>
+                                        </span>
+                                        <span
+                                        v-if="!disabled"
+                                        class="el-upload-list__item-delete"
+                                        >
+                                        <i class="el-icon-download"></i>
+                                        </span>
+                                        <span
+                                        v-if="!disabled"
+                                        class="el-upload-list__item-delete"
+                                        >
+                                        <i class="el-icon-delete"></i>
+                                        </span>
+                                    </span>
+                                    </div>
+                                </el-upload>
+                            </div>
+                            <div class="image-upload-unit">
+                                <b style="margin-bottom:5px;">3/4 tumor</b>
+                                <el-upload
+                                    list-type="picture-card">
+                                    <i slot="default" class="el-icon-plus"></i>
+                                    <div slot="file" slot-scope="{file}">
+                                    <img
+                                        class="el-upload-list__item-thumbnail"
+                                        :src="file.url" alt=""
+                                    >
+                                    <span class="el-upload-list__item-actions">
+                                        <span
+                                        class="el-upload-list__item-preview"
+                                        >
+                                        <i class="el-icon-zoom-in"></i>
+                                        </span>
+                                        <span
+                                        v-if="!disabled"
+                                        class="el-upload-list__item-delete"
+                                        >
+                                        <i class="el-icon-download"></i>
+                                        </span>
+                                        <span
+                                        v-if="!disabled"
+                                        class="el-upload-list__item-delete"
+                                        >
+                                        <i class="el-icon-delete"></i>
+                                        </span>
+                                    </span>
+                                    </div>
+                                </el-upload>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </el-card>
+                <el-card style="margin-left:10px;">
+                    <div class="clinical-data-uploader">
+                        <h2>Upload Clinical Data</h2>
+                        <div style="display: flex;flex-direction: row;">
+                            <div style="display: flex;margin:0px 10px 0px 30px;">
+                                <img style="width:200px;height:200px;color:black;" src="@/assets/clinical_record.svg"/>
+                            </div>
+                            <div style="display: flex;flex-direction: column;align-items:center;justify-content: center;flex:1 1 0;margin:0px 30px 0px 10px;">
+                                <div style="margin-bottom: 10px;">
+                                    <b>Completion status: &nbsp;</b>
+                                    <b :style="{color:clinical_complete_num == total_clinical_num ?' #007BFF' : '#d12323'}">{{clinical_complete_num}}</b>
+                                    <b>/</b>
+                                    <b>{{total_clinical_num}}</b>
+                                </div>
+                                <el-button size="mini" style="margin-top: 10px;" type="primary" @click="clinicalFormVisible=true">
+                                    <span style="font-size:18px;">Input Clinical Data</span>   
+                                </el-button>
+                            </div>
+                        </div>
+                    </div>
+                </el-card>
             </div>
 
             <div style="margin:15px 20px;border:1.5px solid lightgray"></div>
@@ -134,12 +140,16 @@
             <div class="bottom-container">
                 <div style="flex:1 1 0"></div>
                 <el-button size="mini" type="primary" style="font-size:18px;margin-right:40px;">Start Calculation</el-button>
-                <div style="position:absolute;text-align:center;width:100%">
+                <div style="position:absolute;text-align:center;width:100%;height:100%;display:flex;align-items:center;justify-content:center">
                     <div>
-                        <b>MSI score</b>
-                        <b>:</b>
-                        <span>{{MSI_score}}</span>
-                    </div> 
+                        <b style="font-size:20px;">MSI score</b>
+                    </div>
+                    <div>
+                        <b style="font-size:20px;margin:0px 10px;">:</b>
+                    </div>
+                    <div>
+                        <b style="color:#409EFF;font-size:25px;">{{MSI_score}}</b>
+                    </div>
                 </div>
             </div>
         </div>
@@ -489,6 +499,19 @@
 export default {
     data(){
         return {
+
+            //cv附属的数据
+            cv_data1:{
+                name:'1-4',
+            },
+            cv_data2:{
+                name:'1-2',
+            },
+            cv_data3:{
+                name:'3-4',
+            },
+
+
             clinicalFormVisible:false,
             
             clinical_data:{
@@ -524,10 +547,12 @@ export default {
                 'carcinoembryonic_antigen_125':1.08,//CA125
             },
 
-            clinical_complete_num:23,
-            total_clinical_num:24,
+            clinical_complete_num:23,//已经填写的临床数据数目
+            total_clinical_num:24,//总的临床数据数目
 
-            MSI_score:'No score'
+
+
+            MSI_score:0.95,//结果
             
 
         }
@@ -542,7 +567,7 @@ export default {
 
 <style>
         .container {
-            background-color: #fff;
+            background-color: #fdfdfd;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -565,6 +590,8 @@ export default {
 
         .top-container{
             display: flex;
+            justify-content: space-around;
+            margin-bottom:10px;
         }
 
         .bottom-container{
@@ -573,8 +600,6 @@ export default {
         }
 
         .tumor-image-uploader{
-            margin-bottom:25px;
-            margin-right:25px;
             flex:1 1 0;
         }
 
@@ -582,7 +607,6 @@ export default {
             display:flex;
             flex-direction: column;
             align-items: stretch;
-            margin-left:25px;
             flex: 1 1 0;
         }
 

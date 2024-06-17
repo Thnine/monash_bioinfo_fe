@@ -14,99 +14,43 @@
                             <div class="image-upload-unit">
                                 <b style="margin-bottom:5px;">1/4 tumor</b>
                                 <el-upload
-                                    action="http"
+                                    action="api/upload_CT"
                                     list-type="picture-card"
-                                    :data="cv_data1">
-                                    <i slot="default" class="el-icon-plus"></i>
-                                    <div slot="file" slot-scope="{file}">
-                                    <img
-                                        class="el-upload-list__item-thumbnail"
-                                        :src="file.url" alt=""
-                                    >
-                                    <span class="el-upload-list__item-actions">
-                                        <span
-                                        class="el-upload-list__item-preview"
-                                        >
-                                        <i class="el-icon-zoom-in"></i>
-                                        </span>
-                                        <span
-                                        v-if="!disabled"
-                                        class="el-upload-list__item-delete"
-                                        >
-                                        <i class="el-icon-download"></i>
-                                        </span>
-                                        <span
-                                        v-if="!disabled"
-                                        class="el-upload-list__item-delete"
-                                        >
-                                        <i class="el-icon-delete"></i>
-                                        </span>
-                                    </span>
-                                    </div>
+                                    :data="CT_data['1-4']"
+                                    accept=".dcm"
+                                    :show-file-list="false"
+                                    :on-success="handleUploadCTSuccess"
+                                    :on-error="handleUploadCTFail">
+                                    <img v-if="CT_Url['1-4']" :src="CT_Url['1-4']" class="CTupload-avatar">
+                                    <i v-else class="el-icon-plus"></i>
                                 </el-upload>
                             </div>
                             <div class="image-upload-unit">
                                 <b style="margin-bottom:5px;">1/2 tumor</b>
                                 <el-upload
-                                    list-type="picture-card">
-                                    <i slot="default" class="el-icon-plus"></i>
-                                    <div slot="file" slot-scope="{file}">
-                                    <img
-                                        class="el-upload-list__item-thumbnail"
-                                        :src="file.url" alt=""
-                                    >
-                                    <span class="el-upload-list__item-actions">
-                                        <span
-                                        class="el-upload-list__item-preview"
-                                        >
-                                        <i class="el-icon-zoom-in"></i>
-                                        </span>
-                                        <span
-                                        v-if="!disabled"
-                                        class="el-upload-list__item-delete"
-                                        >
-                                        <i class="el-icon-download"></i>
-                                        </span>
-                                        <span
-                                        v-if="!disabled"
-                                        class="el-upload-list__item-delete"
-                                        >
-                                        <i class="el-icon-delete"></i>
-                                        </span>
-                                    </span>
-                                    </div>
+                                    action="api/upload_CT"
+                                    list-type="picture-card"
+                                    :data="CT_data['1-2']"
+                                    accept=".dcm"
+                                    :show-file-list="false"
+                                    :on-success="handleUploadCTSuccess"
+                                    :on-error="handleUploadCTFail">
+                                    <img v-if="CT_Url['1-2']" :src="CT_Url['1-2']" class="CTupload-avatar">
+                                    <i v-else class="el-icon-plus"></i>
                                 </el-upload>
                             </div>
                             <div class="image-upload-unit">
                                 <b style="margin-bottom:5px;">3/4 tumor</b>
                                 <el-upload
-                                    list-type="picture-card">
-                                    <i slot="default" class="el-icon-plus"></i>
-                                    <div slot="file" slot-scope="{file}">
-                                    <img
-                                        class="el-upload-list__item-thumbnail"
-                                        :src="file.url" alt=""
-                                    >
-                                    <span class="el-upload-list__item-actions">
-                                        <span
-                                        class="el-upload-list__item-preview"
-                                        >
-                                        <i class="el-icon-zoom-in"></i>
-                                        </span>
-                                        <span
-                                        v-if="!disabled"
-                                        class="el-upload-list__item-delete"
-                                        >
-                                        <i class="el-icon-download"></i>
-                                        </span>
-                                        <span
-                                        v-if="!disabled"
-                                        class="el-upload-list__item-delete"
-                                        >
-                                        <i class="el-icon-delete"></i>
-                                        </span>
-                                    </span>
-                                    </div>
+                                    action="api/upload_CT"
+                                    list-type="picture-card"
+                                    :data="CT_data['3-4']"
+                                    accept=".dcm"
+                                    :show-file-list="false"
+                                    :on-success="handleUploadCTSuccess"
+                                    :on-error="handleUploadCTFail">
+                                    <img v-if="CT_Url['3-4']" :src="CT_Url['3-4']" class="CTupload-avatar">
+                                    <i v-else class="el-icon-plus"></i>
                                 </el-upload>
                             </div>
                         </div>
@@ -138,9 +82,9 @@
             <div style="margin:15px 20px;border:1.5px solid lightgray"></div>
 
             <div class="bottom-container">
-                <div style="flex:1 1 0"></div>
-                <el-button size="mini" type="primary" style="font-size:18px;margin-right:40px;">Start Calculation</el-button>
-                <div style="position:absolute;text-align:center;width:100%;height:100%;display:flex;align-items:center;justify-content:center">
+                <div style="flex:1 1 0;position: relative;"></div>
+                <el-button @click="calculate" size="mini" type="primary" style="font-size:18px;margin-right:40px;">Start Calculation</el-button>
+                <div style="position:absolute;text-align:center;left:30%;width:40%;height:100%;display:flex;align-items:center;justify-content:center">
                     <div>
                         <b style="font-size:20px;">MSI score</b>
                     </div>
@@ -157,6 +101,7 @@
         <!-- Clinical Data Fill Form Dialog-->
         <el-dialog
             :visible.sync="clinicalFormVisible"
+            :close-on-click-modal="false"
             width="40%">
 
             <div class="clinical-form-intro-container">
@@ -171,7 +116,16 @@
                     </p>
                 </div>
                 <div style="text-align:left">
-                    <el-button type="text"><span style="font-size:18px">Use .csv files to fill in quickly</span></el-button>
+                    <el-upload
+                        action="api/autofill_CSV"
+                        :show-file-list="false"
+                        :data="autofill_params"
+                        accept=".csv"
+                        :on-success="handleUploadCSVSuccess"
+                        :on-error="handleUploadCSVFail">
+                        <el-button type="text"><span style="font-size:18px">
+                            Use .csv files to fill in quickly</span></el-button>
+                    </el-upload>
                 </div>
 
             </div>
@@ -261,6 +215,14 @@
                         <div slot="header"><b>Neutrophil Count</b></div>
                         <div>
                             <el-input size="mini" v-model="clinical_data['neutrophil_count']" style="width:70%;">
+                                <template slot="append">*109/L</template>
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Lymphocyte Count</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['lymphocyte_count']" style="width:70%;">
                                 <template slot="append">*109/L</template>
                             </el-input>
                         </div>
@@ -421,9 +383,25 @@
                         </div>
                     </el-card>
                     <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Hemoglobin</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['hemoglobin']" style="width:70%;">
+                                <template slot="append">g/L</template>
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
                         <div slot="header"><b>Platelet Concentration</b></div>
                         <div>
                             <el-input size="mini" v-model="clinical_data['platelet_concentration']" style="width:70%;">
+                                <template slot="append">*109/L</template>
+                            </el-input>
+                        </div>
+                    </el-card>
+                    <el-card class="clinical-form-unit">
+                        <div slot="header"><b>Monocyte Count</b></div>
+                        <div>
+                            <el-input size="mini" v-model="clinical_data['monocyte_count']" style="width:70%;">
                                 <template slot="append">*109/L</template>
                             </el-input>
                         </div>
@@ -489,79 +467,255 @@
 
         </el-dialog>
 
-
     </div>
 </template>
 
 <script>
 
-
+import {nanoid} from "nanoid"
+import axios from "axios"
 export default {
     data(){
         return {
 
-            //cv附属的数据
-            cv_data1:{
-                name:'1-4',
+            id:null,
+
+
+            /**
+             * CT
+             */
+            
+            //CT附属的数据
+            CT_data:{
+                '1-4':{
+                    name:'1-4',
+                    nanoid:null,
+                },
+                '1-2':{
+                    name:'1-2',
+                    nanoid:null,
+                },
+                '3-4':{
+                    name:'3-4',
+                    nanoid:null,
+                },
             },
-            cv_data2:{
-                name:'1-2',
-            },
-            cv_data3:{
-                name:'3-4',
+            CT_Url:{
+                '1-4':null,
+                '1-2':null,
+                '3-4':null,
             },
 
+
+            /**
+             * Clinical Data
+             */
 
             clinicalFormVisible:false,
-            
             clinical_data:{
-                'gender':'male',
-                'age':64,
-                'history_of_diabetes':'without',//糖尿病史 without with
-                'history_of_hypertension':'with',//高血压病史 without with
-                'smoking_history':'with',//吸烟史 without with
-                'drinking_history':'else',//饮酒史 without sometimes frequently else
-                'family_history_of_tumor':'without',//肿瘤家族史 without with 
-                'pathological_stage':'II',//病理分期 I II III IV else
-                'perineural_invasion':'else',//神经周侵犯 without with else
-                'pathological_type':'well',//病理类型 well mix poor else
-                'position':'RCC',//位置 RCC LCC REC else
-                'white_blood_cell_count':6.1,//白细胞计数
-                'red_blood_cell_count':4.19,//红细胞计数
-                'platelet_concentration':153.0,//血小板计数
-                'neutrophil_count':3.8,//中性粒细胞计数
-                'lymphocyte_count':1.9,//淋巴细胞计数
-                'red_cell_volumn_distribution_width':14.4,//红细胞体积分布宽度
-                'plateletcrit':0.2,//血小板比容
-                'mean_platelet_volume':11.3,//平均血小板体积
-                'albumin':42.8,//白蛋白
-                'globulin':20.8,//球蛋白
-                'albumin_globulin_ratio':2.1,//白球比值
-                'blood_glucose':5.03,//血糖
-                'triglyceride':1.23,//甘油三酯
-                'cholesterol':4.42,//胆固醇
-                'high_density_lipoprotein':1.61,//高密度脂蛋白
-                'low_density_lipoprotein':2.46,//低密度脂蛋白
-                'carcinoembryonic_antigen':0.2,//CEA
-                'carcinoembryonic_antigen_199':2.29,//CA199
-                'carcinoembryonic_antigen_125':1.08,//CA125
+                'gender':null,
+                'age':0,
+                'history_of_diabetes':null,//糖尿病史 without with
+                'history_of_hypertension':null,//高血压病史 without with
+                'smoking_history':null,//吸烟史 without with
+                'drinking_history':null,//饮酒史 without sometimes frequently else
+                'family_history_of_tumor':null,//肿瘤家族史 without with 
+                'pathological_stage':null,//病理分期 I II III IV else
+                'perineural_invasion':null,//神经周侵犯 without with else
+                'pathological_type':null,//病理类型 well mix poor else
+                'position':null,//位置 RCC LCC REC else
+                'white_blood_cell_count':null,//白细胞计数
+                'red_blood_cell_count':null,//红细胞计数
+                'hemoglobin':null,//血色素
+                'platelet_concentration':null,//血小板计数
+                'neutrophil_count':null,//中性粒细胞计数
+                'lymphocyte_count':null,//淋巴细胞计数 TODO
+                'monocyte_count':null,//单核细胞计数 TODO
+                'red_cell_volumn_distribution_width':null,//红细胞体积分布宽度
+                'plateletcrit':null,//血小板比容
+                'mean_platelet_volume':null,//平均血小板体积
+                'albumin':null,//白蛋白
+                'globulin':null,//球蛋白
+                'albumin_globulin_ratio':null,//白球比值
+                'blood_glucose':null,//血糖
+                'triglyceride':null,//甘油三酯
+                'cholesterol':null,//胆固醇
+                'high_density_lipoprotein':null,//高密度脂蛋白
+                'low_density_lipoprotein':null,//低密度脂蛋白
+                'carcinoembryonic_antigen':null,//CEA
+                'carcinoembryonic_antigen_199':null,//CA199
+                'carcinoembryonic_antigen_125':null,//CA125
+            },
+            clinical_complete_num:23,//已经填写的临床数据数目
+            total_clinical_num:32,//总的临床数据数目
+            clinical_transformer:{ //字符属性的编码表
+                'gender':{
+                    'male':[0],
+                    'female':[1],
+                },
+                'history_of_diabetes':{
+                    'without':[0],
+                    'with':[1],
+                },
+                'history_of_hypertension':{
+                    'without':[0],
+                    'with':[1],
+                },
+                'smoking_history':{
+                    'without':[0],
+                    'with':[1],
+                },
+                'drinking_history':{
+                    'without':[1,0,0,0],
+                    'sometimes':[0, 1, 0, 0],
+                    'frequently':[0, 0, 1, 0],
+                    'else':[0, 0, 0, 1],
+                },
+                'family_history_of_tumor':{
+                    'without':[0],
+                    'with':[1],
+                },
+                'pathological_stage':{
+                    'I':[1, 0, 0, 0, 0],
+                    'II':[0, 1, 0, 0, 0],
+                    'III':[0, 0, 1, 0, 0],
+                    'IV':[0, 0, 0, 1, 0],
+                    'else':[0, 0, 0, 0, 1]
+                },
+                'perineural_invasion':{
+                    'without':[1, 0, 0],
+                    'with':[0, 1, 0],
+                    'else':[0, 0, 1],
+                },
+                'pathological_type':{
+                    'well':[1, 0, 0, 0],
+                    'mix':[0, 1, 0, 0],
+                    'poor':[0, 0, 1, 0],
+                    'else':[0, 0, 0, 1],
+                },
+                'position':{
+                    'RCC':[1,0,0,0],
+                    'LCC':[0, 1, 0, 0],
+                    'REC':[0, 0, 1, 0],
+                    'else':[0, 0, 0, 1],
+                }
+
+            },
+            autofill_params:{
+                'id':null
             },
 
-            clinical_complete_num:23,//已经填写的临床数据数目
-            total_clinical_num:24,//总的临床数据数目
-
-
-
-            MSI_score:0.95,//结果
+            MSI_score:'No Score',//结果
             
 
         }
     },
     methods:{
-        test(){
-            console.log(this.clinical_data)
+
+        calculate(){//计算结果
+            const self = this
+            let clinical_data = JSON.parse(JSON.stringify(this.clinical_data))
+            //数据转换
+            for(let key in clinical_data){
+                if(typeof clinical_data[key]=='string'){
+                    clinical_data[key] = this.clinical_transformer[key][clinical_data[key]]
+                }
+                else{
+                    clinical_data[key] = [clinical_data[key]]
+                }
+            }
+            console.log('clinical_data',clinical_data)
+            let CT_data = {
+                CT_list:['1-4','1-2','3-4'],
+            }
+            axios({
+                method:"post",
+                url:"/api/calc",
+                data:{
+                    'id':this.id,
+                    'clinical_data':clinical_data,
+                    'CT_data':CT_data,
+                }
+            }).then((res)=>{
+                console.log('res:',res)
+                self.MSI_score = res.data.score.toFixed(5)
+                this.$message({
+                    'message':'Calculate successfully',
+                    'type':'success'
+                })
+            }).catch((err)=>{
+                console.log('err:',err)
+                this.$message({
+                    'message':'Calculate failed',
+                    'type':'error'
+                })
+            })
+
+        },
+
+        handleUploadCTSuccess(response,file,fileList){
+            console.log('res:',response)
+            this.CT_Url[response.name] = response.url + '?' + new Date().getTime()
+        },
+        handleUploadCTFail(err,file,fileList){
+            console.log('res:',err)
+        },
+        handleUploadCSVSuccess(response,file,fileList){
+            console.log('csv_res:',response)
+            for(let key in response){
+                this.clinical_data[key] = response[key]
+            }
+            this.$message({
+                'message':'Autofill successfully',
+                'type':'success'
+            })
+            
+        },
+        handleUploadCSVFail(err,file,fileList){
+            console.log('res:',err)
+            this.$message({
+                'message':'Autofill failed',
+                'type':'error'
+            })
+        },
+        instanceClose(event){
+
+            navigator.sendBeacon("/api/clear",JSON.stringify({'id':this.id}))
         }
-    }
+    },
+
+    watch:{
+        clinical_data:{
+            deep:true,
+            immediate:true,
+            handler(newValue,oldValue){
+                let tempValidCount = 0;
+                for(let key in this.clinical_data){
+                    if(this.clinical_data[key] === undefined || this.clinical_data[key] === null || this.clinical_data[key] == ''){
+                        continue;
+                    }
+                    else{
+                        tempValidCount = tempValidCount+1;
+                    }
+                }
+                this.clinical_complete_num = tempValidCount
+            }
+        }
+    },
+
+    mounted(){
+        //获取id
+        this.id = nanoid();
+        for(let key in this.CT_data){
+            this.CT_data[key]['nanoid'] = this.id;
+        }
+        this.autofill_params['nanoid'] = this.id;
+
+
+    },
+
+
+
 }
 </script>
 
@@ -610,6 +764,10 @@ export default {
             flex: 1 1 0;
         }
 
+        .CTupload-avatar{
+            height: 100%;
+            width: 100%;
+        }
 
         .image-upload-unit{
             margin:10px;

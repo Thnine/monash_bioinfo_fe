@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <box1/>
+    <box1 ref="box1"/>
   </div>
 </template>
 
@@ -12,7 +12,18 @@ export default {
   name: 'App',
   components: {
     box1
+  },
+
+  mounted(){
+    //绑定网页关闭事件，清空相关数据
+    window.addEventListener('beforeunload',this.$refs['box1'].instanceClose)
+    console.log(window)
+  },
+  beforeDestroy(){
+    window.removeEventListener('beforeunload',this.$refs['box1'].instanceClose)
+
   }
+
 }
 </script>
 
